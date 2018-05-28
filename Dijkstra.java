@@ -1,3 +1,9 @@
+/**
+ * Includes the Dijkstra-Class
+ *
+ * @author Johann Becker, Florian Dahlitz, Tim Leuschner
+ */
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -7,6 +13,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+/**
+ * Provides the Dijkstra-Algorithm.
+ */
 public class Dijkstra {
     private final List<Vertex> vertices;
     private final List<Edge> edges;
@@ -15,19 +24,23 @@ public class Dijkstra {
     private Map<Vertex, Vertex> precursor;
     private Map<Vertex, Integer> distance;
 
+    /**
+     * Constructor of the Dijkstra-Class
+     *
+     * @param graph Current graph used by the Dijkstra-Algorithm
+     */
     public Dijkstra(Graph graph) {
         this.vertices = new ArrayList<Vertex>(graph.getVertices());
         this.edges = new ArrayList<Edge>(graph.getEdges());
     }
 
     /**
-     * Initialisiert die benötigten Maps und Sets.
-     * Führt den eigentlichen Algorithmus aus.
-     * Solange ungewisse Knoten existieren, wird die kürzeste Distanz vom
-     * Startknoten zu allen anderen Knoten ermittelt.
+     * Initialised the needed Lists ans Sets.
+     * It is used to run the main part of the algorithm.
+     * As long as unknown vertices exist, the minimal distance from the
+     * start vertex to all other vertices is calculated.
      *
-     * @param ursprung
-     *            Startknoten
+     * @param start Represents the origin of the graph
      */
     public void runDijkstraRun(Vertex start) {
         finishedVertices = new HashSet<Vertex>();
@@ -46,12 +59,11 @@ public class Dijkstra {
     }
 
     /**
-     * Ermittelt den Pfad vom Zielknoten aus rückwärts, dabei wird die Vorgänger Map
-     * ausgelsen, welche den Pfad enthält.
+     * Searches for the path and uses the target as origin.
+     * The precursor-Map is used containing the path.
      *
-     * @param ziel
-     *            Der Zielknoten, der erreicht werden soll
-     * @return den Pfad als LinkedList in korrekter Reihenfolge
+     * @param target Representing the paths target.
+     * @return Path as a LinkedList.
      */
     public LinkedList<Vertex> findPath(Vertex target) {
         LinkedList<Vertex> path = new LinkedList<Vertex>();
@@ -74,14 +86,14 @@ public class Dijkstra {
     }
 
     /**
-     * Ermittelt das Kantengewicht zwischen zwei Knoten und überprüft, ob die beiden
-     * Knoten miteinander verbunden sind, indem Ursprung und Ziel verglichen werden.
+     * Determines the weight of the edge between two vertices and checks, whether
+     * they are linked with each other. Therefore, start and target of the edge are
+     * compared.
      *
-     * @param ursprung
-     *            Knoten, von dem ausgegangen werden soll
-     * @param ziel
-     *            Knoten, der erreicht werden soll
-     * @return Das Kantengewicht, also die Distanz, zwischen den beiden Knoten
+     * @param start Representing the origin of it
+     * @param target Representing the target of it
+     *
+     * @return Weight of the edge between two vertices (distance)
      * @throws RuntimeException
      */
     private int getDistance(Vertex start, Vertex target) {
@@ -96,12 +108,11 @@ public class Dijkstra {
     }
 
     /**
-     * Ermittelt die benachbarten Knoten desjenigen Knotens, der übergeben wird.
-     * Dabei werden die bereits erledigten Knoten ignoriert
+     * Determines the neighbored vertex of the given one. Already finished
+     * vertices are ignored.
      *
-     * @param node
-     *            Der Knoten, dessen Nachbarn ermittelt werden sollen
-     * @return Gibt Liste der benachbarten Knoten zurück
+     * @param vertex Representing the vertix the neighbor is been searched for
+     * @return List of neighboring vertices
      */
     private List<Vertex> getNeighbor(Vertex vertex) {
         List<Vertex> neighbor = new ArrayList<Vertex>();
@@ -115,26 +126,21 @@ public class Dijkstra {
     }
 
     /**
-     * Überprüft, ob ein Knoten besucht wurde, indem die Liste der erledigten Knoten
-     * nach dem Parameter durchsucht wird
+     * Checks, whether a vertex was already visited.
      *
-     * @param node
-     *            Der Knoten, der überprüft werden soll
-     * @return true, falls der Knoten besucht wurde, sonst false
+     * @param vertex Representing the to be checked vertex
+     * @return true, if the vertex was already visited, false instead
      */
     private boolean visited(Vertex vertex) {
         return finishedVertices.contains(vertex);
     }
 
     /**
-     * Ermittelt die momentan kürzeste Distanz, bzw. die in der Map gespeicherte
-     * Distanz, damit ein Knoten erreicht wird. Falls der Knoten noch nicht erreicht
-     * wurde, wird der Wert auf MAX_VALUE gesetzt.
+     * Determines the smallest distance to a given vertex based on the distances
+     * in the Map. If the vertex was not reached yet, the value is set to MAX_VALUE.
      *
-     * @param ziel
-     *            Der knoten, dessen kürzeste Distanz vom Startknoten aus ermittelt
-     *            werden soll.
-     * @return die Distanz, welche bis zum Knoten zurückgelegt werden muss.
+     * @param target Representing the vertex the smallest distance to has to be calculated
+     * @return distance
      */
     private int getSmallestDistance(Vertex target) {
         Integer d = distance.get(target);
@@ -147,14 +153,9 @@ public class Dijkstra {
     }
 
     /**
-     * Ermittelt die minimale Distanz vom übergebenen Knoten zu den Nachbarknoten.
-     * Dabei wird zunächst die Distanz zu den benachbarten Knoten ermittelt. Sind
-     * die Nachbarknoten über den übergebenen Knoten effizienter zu erreichen, wird
-     * diese Distanz übernommen, als Vorgänger vermerkt und der Nachbarknoten als
-     * unbesucht gespeichert.
+     * Searches for the smallest distance between a given vertex and all other vertices.
      *
-     * @param node
-     *            Der Knoten, der erreicht werden soll
+     * @param vertex Representing the vertex, which has to be reached
      */
     private void findMinimalDistance(Vertex vertex) {
         List<Vertex> neighboredVertices = getNeighbor(vertex);
@@ -169,12 +170,11 @@ public class Dijkstra {
     }
 
     /**
-     * Ermittelt denjenigen Knoten mit der kürzesten Distanz vom Startknoten aus.
-     * Dabei werden die Distanzen aller Knoten zum Startknoten verglichen.
+     * Searches for the vertex with the smallest distance between the origin and
+     * the given vertices.
      *
-     * @param node
-     *            Die Menge der Knoten, die sich im Graph befinden
-     * @return den Knoten mit der geringsten Distanz vom Startknoten aus
+     * @param vertex Set of vertices being part of the Map
+     * @return vertex with the smallest distance to the origin
      */
     private Vertex getSmallestVertex(Set<Vertex> vertices) {
         Vertex minimum = null;

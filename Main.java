@@ -1,15 +1,25 @@
+/**
+ * Includes the Main-Class
+ *
+ * @author Johann Becker, Florian Dahlitz, Tim Leuschner
+ */
+
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * Class handling the application flow.
+ * It is used for demonstration purposes.
+ */
 public class Main {
     private static List<Vertex> vertices = new ArrayList<Vertex>();
     private static List<Edge> edges = new ArrayList<Edge>();
 
     /**
-     * Fügt der knoten Liste einen neuen Knoten hinzu
+     * Adds a vertex to the list of vertices.
      *
-     * @param name des Knotens
+     * @param name Name of the vertex
      */
     private static void addVertex(String name) {
         Vertex vertex = new Vertex(name);
@@ -17,11 +27,12 @@ public class Main {
     }
 
     /**
-     * Erzeugt aus zwei Knoten eine Kante und fügt sie der edges Liste hinzu
+     * Creates an edge based on two given vertices and adds it to the list
+     * of edges.
      *
-     * @param ursprung Startknoten
-     * @param ziel Endknoten
-     * @param gewicht der Kante
+     * @param start Representing the edges origin
+     * @param target Representing the edges target
+     * @param weight Representing the edges weight
      */
     private static void addEdge(Vertex start, Vertex target, int weight) {
         Edge edge = new Edge(start, target, weight);
@@ -29,12 +40,11 @@ public class Main {
     }
 
     /**
-     * Durchsucht eine Liste von Knoten nach einem bestimmten Knoten und gibt
-     * diesen zurück
+     * Searches for a specific vertex in a given list of vertices and returns it.
      *
-     * @param name des Knoten der gefunden werden soll
-     * @param vertex Liste der Knoten die durchsucht werden soll
-     * @return den gefundenen Knoten
+     * @param name Name of the vertex searched for
+     * @param vertices List of vertices sifted through
+     * @return vertex object searched for
      */
     private static Vertex findByName(String name, List<Vertex> vertices) {
         for (Vertex vertex : vertices) {
@@ -47,7 +57,9 @@ public class Main {
     }
 
     /**
-     * @param args Kommandozeilen input
+     * Main-method called from the command line.
+     *
+     * @param args Command line input
      **/
     public static void main(String... args) {
         addVertex("Frankfurt");
