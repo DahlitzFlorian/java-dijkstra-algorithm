@@ -1,21 +1,21 @@
 import java.util.List;
 
 public class Graph {
-    private List<Vertex> node;
-    private List<Edge> kanten;
-    
-    public Graph(List<Vertex> node, List<Edge> kanten) {
-        this.node = node;
-        this.kanten = kanten; 
+    private List<Vertex> vertex;
+    private List<Edge> edges;
+
+    public Graph(List<Vertex> vertex, List<Edge> edges) {
+        this.vertex = vertex;
+        this.edges = edges;
     }
 
-    public List<Vertex> getKnoten() {
-        return node;
+    public List<Vertex> getVertex() {
+        return vertex;
     }
 
-    public List<Edge> getKanten() {
-        return kanten;
+    public List<Edge> getEdges() {
+        return edges;
     }
-    
-    
+
+
 }

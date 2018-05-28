@@ -1,29 +1,29 @@
 public class Edge {
-    private Vertex ursprung;
-    private Vertex ziel;
-    private final int gewicht;
-    
-    public Edge(Vertex ursprung, Vertex ziel, int gewicht) {
-        this.ursprung = ursprung;
-        this.ziel = ziel;
-        this.gewicht = gewicht;
+    private Vertex start;
+    private Vertex target;
+    private final int weight;
+
+    public Edge(Vertex start, Vertex target, int weight) {
+        this.start = start;
+        this.target = target;
+        this.weight = weight;
     }
 
-    public Vertex getUrsprung() {
-        return ursprung;
+    public Vertex getStart() {
+        return start;
     }
 
-    public Vertex getZiel() {
-        return ziel;
+    public Vertex getTarget() {
+        return target;
     }
 
-    public int getGewicht() {
-        return gewicht;
+    public int getWeight() {
+        return weight;
     }
-    
+
     @Override
     public String toString() {
-        return ursprung.getName() + " -> " + ziel.getName();
+        return start.getName() + " -> " + target.getName();
     }
 
 }
