@@ -8,16 +8,15 @@ import java.util.Map;
 import java.util.Set;
 
 public class Dijkstra {
-
-    private final List<Vertex> vertex;
+    private final List<Vertex> vertices;
     private final List<Edge> edges;
-    private Set<Vertex> finishedVertex;
-    private Set<Vertex> unknownVertex;
+    private Set<Vertex> finishedVertices;
+    private Set<Vertex> unknownVertices;
     private Map<Vertex, Vertex> precursor;
     private Map<Vertex, Integer> distance;
 
     public Dijkstra(Graph graph) {
-        this.vertex = new ArrayList<Vertex>(graph.getVertex());
+        this.vertices = new ArrayList<Vertex>(graph.getVertices());
         this.edges = new ArrayList<Edge>(graph.getEdges());
     }
 
@@ -31,17 +30,17 @@ public class Dijkstra {
      *            Startknoten
      */
     public void runDijkstraRun(Vertex start) {
-        finishedVertex = new HashSet<Vertex>();
-        unknownVertex = new HashSet<Vertex>();
+        finishedVertices = new HashSet<Vertex>();
+        unknownVertices = new HashSet<Vertex>();
         distance = new HashMap<Vertex, Integer>();
         precursor = new HashMap<Vertex, Vertex>();
         distance.put(start, 0);
-        unknownVertex.add(start);
+        unknownVertices.add(start);
 
-        while (unknownVertex.size() > 0) {
-            Vertex vertex = getSmallestVertex(unknownVertex);
-            finishedVertex.add(vertex);
-            unknownVertex.remove(vertex);
+        while (unknownVertices.size() > 0) {
+            Vertex vertex = getSmallestVertex(unknownVertices);
+            finishedVertices.add(vertex);
+            unknownVertices.remove(vertex);
             findMinimalDistance(vertex);
         }
     }
@@ -61,13 +60,16 @@ public class Dijkstra {
         if (precursor.get(step) == null) {
             return null;
         }
+
         path.add(step);
+
         while (precursor.get(step) != null) {
             step = precursor.get(step);
             path.add(step);
         }
 
         Collections.reverse(path);
+
         return path;
     }
 
@@ -88,6 +90,7 @@ public class Dijkstra {
                 return e.getWeight();
             }
         }
+
         throw new RuntimeException("Da lief wohl etwas schief ¯\\_(ツ)_/¯ "+
                          "(Es gibt keine einzige Verbindung zwischen Urspung und Ziel)");
     }
@@ -107,6 +110,7 @@ public class Dijkstra {
                 neighbor.add(e.getTarget());
             }
         }
+
         return neighbor;
     }
 
@@ -119,7 +123,7 @@ public class Dijkstra {
      * @return true, falls der Knoten besucht wurde, sonst false
      */
     private boolean visited(Vertex vertex) {
-        return finishedVertex.contains(vertex);
+        return finishedVertices.contains(vertex);
     }
 
     /**
@@ -136,7 +140,8 @@ public class Dijkstra {
         Integer d = distance.get(target);
         if (d == null) {
             return Integer.MAX_VALUE;
-        } else {
+        }
+        else {
             return d;
         }
     }
@@ -153,11 +158,12 @@ public class Dijkstra {
      */
     private void findMinimalDistance(Vertex vertex) {
         List<Vertex> neighboredVertices = getNeighbor(vertex);
+
         for (Vertex target : neighboredVertices) {
             if (getSmallestDistance(target) > getSmallestDistance(vertex) + getDistance(vertex, target)) {
                 distance.put(target, getSmallestDistance(vertex) + getDistance(vertex, target));
                 precursor.put(target, vertex);
-                unknownVertex.add(target);
+                unknownVertices.add(target);
             }
         }
     }
@@ -175,12 +181,14 @@ public class Dijkstra {
         for (Vertex vertex : vertices) {
             if (minimum == null) {
                 minimum = vertex;
-            } else {
+            }
+            else {
                 if (getSmallestDistance(vertex) < getSmallestDistance(minimum)) {
                     minimum = vertex;
                 }
             }
         }
+
         return minimum;
     }
 }

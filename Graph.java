@@ -1,21 +1,19 @@
 import java.util.List;
 
 public class Graph {
-    private List<Vertex> vertex;
+    private List<Vertex> vertices;
     private List<Edge> edges;
 
-    public Graph(List<Vertex> vertex, List<Edge> edges) {
-        this.vertex = vertex;
+    public Graph(List<Vertex> vertices, List<Edge> edges) {
+        this.vertices = vertices;
         this.edges = edges;
     }
 
-    public List<Vertex> getVertex() {
-        return vertex;
+    public List<Vertex> getVertices() {
+        return vertices;
     }
 
     public List<Edge> getEdges() {
         return edges;
     }
-
-
 }

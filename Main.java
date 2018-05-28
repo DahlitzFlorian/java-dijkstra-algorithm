@@ -3,8 +3,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class Main {
-
-    private static List<Vertex> vertex = new ArrayList<Vertex>();
+    private static List<Vertex> vertices = new ArrayList<Vertex>();
     private static List<Edge> edges = new ArrayList<Edge>();
 
     /**
@@ -13,7 +12,8 @@ public class Main {
      * @param name des Knotens
      */
     private static void addVertex(String name) {
-        vertex.add(new Vertex(name));
+        Vertex vertex = new Vertex(name);
+        vertices.add(vertex);
     }
 
     /**
@@ -24,7 +24,8 @@ public class Main {
      * @param gewicht der Kante
      */
     private static void addEdge(Vertex start, Vertex target, int weight) {
-        edges.add(new Edge(start, target, weight));
+        Edge edge = new Edge(start, target, weight);
+        edges.add(edge);
     }
 
     /**
@@ -35,14 +36,16 @@ public class Main {
      * @param vertex Liste der Knoten die durchsucht werden soll
      * @return den gefundenen Knoten
      */
-    private static Vertex findByName(String name, List<Vertex> vertex) {
-        for (Vertex k : vertex) {
-            if (k.getName().equals(name)) {
-                return k;
+    private static Vertex findByName(String name, List<Vertex> vertices) {
+        for (Vertex vertex : vertices) {
+            if (vertex.getName().equals(name)) {
+                return vertex;
             }
         }
+
         throw new RuntimeException("Du Idiot. Kannst nicht mal einen richtigen Namen eingeben.");
     }
+
     /**
      * @param args Kommandozeilen input
      **/
@@ -58,29 +61,26 @@ public class Main {
         addVertex("Stuttgart");
         addVertex("Kassel");
 
-        addEdge(findByName("Frankfurt", vertex), findByName("Mannheim", vertex), 85);
-        addEdge(findByName("Mannheim", vertex), findByName("Karlsruhe", vertex), 80);
-        addEdge(findByName("Karlsruhe", vertex), findByName("Augsburg", vertex), 250);
-        addEdge(findByName("Augsburg", vertex), findByName("Muenchen", vertex), 84);
-        addEdge(findByName("Frankfurt", vertex), findByName("Wuerzburg", vertex), 217);
-        addEdge(findByName("Wuerzburg", vertex), findByName("Erfurt", vertex), 186);
-        addEdge(findByName("Wuerzburg", vertex), findByName("Nuernberg", vertex), 103);
-        addEdge(findByName("Stuttgart", vertex), findByName("Nuernberg", vertex), 183);
-        addEdge(findByName("Nuernberg", vertex), findByName("Muenchen", vertex), 167);
-        addEdge(findByName("Frankfurt", vertex), findByName("Kassel", vertex), 173);
-        addEdge(findByName("Kassel", vertex), findByName("Muenchen", vertex), 502);
+        addEdge(findByName("Frankfurt", vertices), findByName("Mannheim", vertices), 85);
+        addEdge(findByName("Mannheim", vertices), findByName("Karlsruhe", vertices), 80);
+        addEdge(findByName("Karlsruhe", vertices), findByName("Augsburg", vertices), 250);
+        addEdge(findByName("Augsburg", vertices), findByName("Muenchen", vertices), 84);
+        addEdge(findByName("Frankfurt", vertices), findByName("Wuerzburg", vertices), 217);
+        addEdge(findByName("Wuerzburg", vertices), findByName("Erfurt", vertices), 186);
+        addEdge(findByName("Wuerzburg", vertices), findByName("Nuernberg", vertices), 103);
+        addEdge(findByName("Stuttgart", vertices), findByName("Nuernberg", vertices), 183);
+        addEdge(findByName("Nuernberg", vertices), findByName("Muenchen", vertices), 167);
+        addEdge(findByName("Frankfurt", vertices), findByName("Kassel", vertices), 173);
+        addEdge(findByName("Kassel", vertices), findByName("Muenchen", vertices), 502);
 
 
-        Graph graph = new Graph(vertex, edges);
+        Graph graph = new Graph(vertices, edges);
         Dijkstra dijkstra = new Dijkstra(graph);
-        dijkstra.runDijkstraRun(findByName("Frankfurt", vertex));
-        LinkedList<Vertex> path = dijkstra.findPath(findByName("Muenchen", vertex));
+        dijkstra.runDijkstraRun(findByName("Frankfurt", vertices));
+        LinkedList<Vertex> path = dijkstra.findPath(findByName("Muenchen", vertices));
 
         for (Vertex vertex : path) {
             System.out.println(vertex.getName());
         }
-
-
     }
-
 }

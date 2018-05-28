@@ -25,5 +25,4 @@ public class Edge {
     public String toString() {
         return start.getName() + " -> " + target.getName();
     }
-
 }
