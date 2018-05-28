@@ -30,12 +30,12 @@ public class Main {
      * Creates an edge based on two given vertices and adds it to the list
      * of edges.
      *
-     * @param start Representing the edges origin
+     * @param origin Representing the edges origin
      * @param target Representing the edges target
      * @param weight Representing the edges weight
      */
-    private static void addEdge(Vertex start, Vertex target, int weight) {
-        Edge edge = new Edge(start, target, weight);
+    private static void addEdge(Vertex origin, Vertex target, int weight) {
+        Edge edge = new Edge(origin, target, weight);
         edges.add(edge);
     }
 

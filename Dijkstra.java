@@ -40,15 +40,15 @@ public class Dijkstra {
      * As long as unknown vertices exist, the minimal distance from the
      * start vertex to all other vertices is calculated.
      *
-     * @param start Represents the origin of the graph
+     * @param origin Represents the origin of the graph
      */
-    public void runDijkstraRun(Vertex start) {
+    public void runDijkstraRun(Vertex origin) {
         finishedVertices = new HashSet<Vertex>();
         unknownVertices = new HashSet<Vertex>();
         distance = new HashMap<Vertex, Integer>();
         precursor = new HashMap<Vertex, Vertex>();
-        distance.put(start, 0);
-        unknownVertices.add(start);
+        distance.put(origin, 0);
+        unknownVertices.add(origin);
 
         while (unknownVertices.size() > 0) {
             Vertex vertex = getSmallestVertex(unknownVertices);
@@ -90,16 +90,16 @@ public class Dijkstra {
      * they are linked with each other. Therefore, start and target of the edge are
      * compared.
      *
-     * @param start Representing the origin of it
+     * @param origin Representing the origin of it
      * @param target Representing the target of it
      *
      * @return Weight of the edge between two vertices (distance)
      * @throws RuntimeException
      */
-    private int getDistance(Vertex start, Vertex target) {
-        for (Edge e : edges) {
-            if (e.getStart().equals(start) && e.getTarget().equals(target)) {
-                return e.getWeight();
+    private int getDistance(Vertex origin, Vertex target) {
+        for (Edge edge : edges) {
+            if (edge.getOrigin().equals(origin) && edge.getTarget().equals(target)) {
+                return edge.getWeight();
             }
         }
 
@@ -116,9 +116,9 @@ public class Dijkstra {
      */
     private List<Vertex> getNeighbor(Vertex vertex) {
         List<Vertex> neighbor = new ArrayList<Vertex>();
-        for (Edge e : edges) {
-            if (e.getStart().equals(vertex) && !visited(e.getTarget())) {
-                neighbor.add(e.getTarget());
+        for (Edge edge : edges) {
+            if (edge.getOrigin().equals(vertex) && !visited(edge.getTarget())) {
+                neighbor.add(edge.getTarget());
             }
         }
 

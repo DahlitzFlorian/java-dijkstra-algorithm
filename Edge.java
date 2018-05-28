@@ -8,19 +8,19 @@
  * Represents an edge in the graph theory/Dijkstra-Algorithm
  */
 public class Edge {
-    private Vertex start;
+    private Vertex origin;
     private Vertex target;
     private final int weight;
 
     /**
      * Constructor of the Edge-Class
      *
-     * @param start Representing the origin of the edge
+     * @param origin Representing the origin of the edge
      * @param target Representing the target of the edge
      * @param weight Representing the weight of the edge
      */
-    public Edge(Vertex start, Vertex target, int weight) {
-        this.start = start;
+    public Edge(Vertex origin, Vertex target, int weight) {
+        this.origin = origin;
         this.target = target;
         this.weight = weight;
     }
@@ -30,8 +30,8 @@ public class Edge {
      *
      * @return origin of edge
      */
-    public Vertex getStart() {
-        return start;
+    public Vertex getOrigin() {
+        return origin;
     }
 
     /**
@@ -54,6 +54,6 @@ public class Edge {
 
     @Override
     public String toString() {
-        return start.getName() + " -> " + target.getName();
+        return origin.getName() + " -> " + target.getName();
     }
 }
