@@ -3,6 +3,7 @@
  *
  * @author Johann Becker, Florian Dahlitz, Tim Leuschner
  */
+package dijkstra;
 
 /**
  * Represents an edge in the graph theory/Dijkstra-Algorithm

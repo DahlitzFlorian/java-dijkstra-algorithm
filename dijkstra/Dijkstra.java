@@ -3,6 +3,7 @@
  *
  * @author Johann Becker, Florian Dahlitz, Tim Leuschner
  */
+package dijkstra;
 
 import java.util.ArrayList;
 import java.util.Collections;
