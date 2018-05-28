@@ -23,7 +23,7 @@ public class Dijkstra {
 
     /**
      * Initialisiert die benötigten Maps und Sets.
-     * Führt den eigentlichen Algorithmus aus, solange unsettled Knoten existieren, wird die
+     * Führt den eigentlichen Algorithmus aus, solange ungewisse Knoten existieren, wird die
      * kürzeste Distanz vom Startknoten zu allen anderen Knoten ermittelt.
      * 
      * @param ursprung
