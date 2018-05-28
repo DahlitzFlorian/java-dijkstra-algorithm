@@ -7,14 +7,34 @@ public class Main {
     private static List<Vertex> knoten = new ArrayList<Vertex>();
     private static List<Edge> kanten = new ArrayList<Edge>();
     
+    /**
+     * Fügt der knoten Liste einen neuen Knoten hinzu
+     * 
+     * @param name des Knotens
+     */
     private static void addKnoten(String name) {
         knoten.add(new Vertex(name));
     }
     
+    /**
+     * Erzeugt aus zwei Knoten eine Kante und fügt sie der kanten Liste hinzu
+     * 
+     * @param ursprung Startknoten
+     * @param ziel Endknoten
+     * @param gewicht der Kante
+     */
     private static void addKante(Vertex ursprung, Vertex ziel, int gewicht) {
         kanten.add(new Edge(ursprung, ziel, gewicht));
     }
     
+    /**
+     * Durchsucht eine Liste von Knoten nach einem bestimmten Knoten und gibt
+     * diesen zurück 
+     * 
+     * @param name des Knoten der gefunden werden soll
+     * @param knoten Liste der Knoten die durchsucht werden soll
+     * @return den gefundenen Knoten
+     */
     private static Vertex findByName(String name, List<Vertex> knoten) {
         for (Vertex k : knoten) {
             if (k.getName().equals(name)) {
@@ -53,7 +73,7 @@ public class Main {
         Dijkstra dijkstra = new Dijkstra(graph);
         dijkstra.runDijkstraRun(findByName("Frankfurt", knoten));
         LinkedList<Vertex> pfad = dijkstra.findePfad(findByName("Muenchen", knoten));
-        
+    
         for (Vertex vertex : pfad) {
             System.out.println(vertex.getName());
         }
