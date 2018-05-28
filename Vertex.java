@@ -3,8 +3,7 @@ public class Vertex {
     private String name;
     /**
      * 
-     * @param name
-     *          Knotenname
+     * @param name Knotenname
      **/ 
     public Vertex(String name) {
         this.name = name;

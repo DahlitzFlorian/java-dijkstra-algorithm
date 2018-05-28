@@ -43,7 +43,9 @@ public class Main {
         }
         throw new RuntimeException("Du Idiot. Kannst nicht mal einen richtigen Namen eingeben.");
     }
-    
+    /**
+     * @param args Kommandozeilen input
+     **/
     public static void main(String... args) {
         addKnoten("Frankfurt");
         addKnoten("Mannheim");
