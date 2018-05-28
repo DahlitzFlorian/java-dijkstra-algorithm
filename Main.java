@@ -4,7 +4,7 @@ import java.util.List;
 
 public class Main {
     
-    private static List<Vertex> knoten = new ArrayList<Vertex>();
+    private static List<Vertex> node = new ArrayList<Vertex>();
     private static List<Edge> kanten = new ArrayList<Edge>();
     
     /**
@@ -13,7 +13,7 @@ public class Main {
      * @param name des Knotens
      */
     private static void addKnoten(String name) {
-        knoten.add(new Vertex(name));
+        node.add(new Vertex(name));
     }
     
     /**
@@ -32,11 +32,11 @@ public class Main {
      * diesen zurück 
      * 
      * @param name des Knoten der gefunden werden soll
-     * @param knoten Liste der Knoten die durchsucht werden soll
+     * @param node Liste der Knoten die durchsucht werden soll
      * @return den gefundenen Knoten
      */
-    private static Vertex findByName(String name, List<Vertex> knoten) {
-        for (Vertex k : knoten) {
+    private static Vertex findByName(String name, List<Vertex> node) {
+        for (Vertex k : node) {
             if (k.getName().equals(name)) {
                 return k;
             }
@@ -58,23 +58,23 @@ public class Main {
         addKnoten("Stuttgart");
         addKnoten("Kassel");
         
-        addKante(findByName("Frankfurt", knoten), findByName("Mannheim", knoten), 85);
-        addKante(findByName("Mannheim", knoten), findByName("Karlsruhe", knoten), 80);
-        addKante(findByName("Karlsruhe", knoten), findByName("Augsburg", knoten), 250);
-        addKante(findByName("Augsburg", knoten), findByName("Muenchen", knoten), 84);
-        addKante(findByName("Frankfurt", knoten), findByName("Wuerzburg", knoten), 217);
-        addKante(findByName("Wuerzburg", knoten), findByName("Erfurt", knoten), 186);
-        addKante(findByName("Wuerzburg", knoten), findByName("Nuernberg", knoten), 103);
-        addKante(findByName("Stuttgart", knoten), findByName("Nuernberg", knoten), 183);
-        addKante(findByName("Nuernberg", knoten), findByName("Muenchen", knoten), 167);
-        addKante(findByName("Frankfurt", knoten), findByName("Kassel", knoten), 173);
-        addKante(findByName("Kassel", knoten), findByName("Muenchen", knoten), 502);
+        addKante(findByName("Frankfurt", node), findByName("Mannheim", node), 85);
+        addKante(findByName("Mannheim", node), findByName("Karlsruhe", node), 80);
+        addKante(findByName("Karlsruhe", node), findByName("Augsburg", node), 250);
+        addKante(findByName("Augsburg", node), findByName("Muenchen", node), 84);
+        addKante(findByName("Frankfurt", node), findByName("Wuerzburg", node), 217);
+        addKante(findByName("Wuerzburg", node), findByName("Erfurt", node), 186);
+        addKante(findByName("Wuerzburg", node), findByName("Nuernberg", node), 103);
+        addKante(findByName("Stuttgart", node), findByName("Nuernberg", node), 183);
+        addKante(findByName("Nuernberg", node), findByName("Muenchen", node), 167);
+        addKante(findByName("Frankfurt", node), findByName("Kassel", node), 173);
+        addKante(findByName("Kassel", node), findByName("Muenchen", node), 502);
         
         
-        Graph graph = new Graph(knoten, kanten);
+        Graph graph = new Graph(node, kanten);
         Dijkstra dijkstra = new Dijkstra(graph);
-        dijkstra.runDijkstraRun(findByName("Frankfurt", knoten));
-        LinkedList<Vertex> pfad = dijkstra.findePfad(findByName("Muenchen", knoten));
+        dijkstra.runDijkstraRun(findByName("Frankfurt", node));
+        LinkedList<Vertex> pfad = dijkstra.findePfad(findByName("Muenchen", node));
     
         for (Vertex vertex : pfad) {
             System.out.println(vertex.getName());

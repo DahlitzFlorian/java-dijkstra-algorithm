@@ -9,7 +9,7 @@ import java.util.Set;
 
 public class Dijkstra {
 
-    private final List<Vertex> knoten;
+    private final List<Vertex> node;
     private final List<Edge> kanten;
     private Set<Vertex> erledigteKnoten;
     private Set<Vertex> ungewisseKnoten;
@@ -17,7 +17,7 @@ public class Dijkstra {
     private Map<Vertex, Integer> distanz;
 
     public Dijkstra(Graph graph) {
-        this.knoten = new ArrayList<Vertex>(graph.getKnoten());
+        this.node = new ArrayList<Vertex>(graph.getKnoten());
         this.kanten = new ArrayList<Edge>(graph.getKanten());
     }
 
@@ -39,10 +39,10 @@ public class Dijkstra {
         ungewisseKnoten.add(ursprung);
 
         while (ungewisseKnoten.size() > 0) {
-            Vertex knoten = getKleinstenKnoten(ungewisseKnoten);
-            erledigteKnoten.add(knoten);
-            ungewisseKnoten.remove(knoten);
-            findeMinimaleDistanz(knoten);
+            Vertex node = getKleinstenKnoten(ungewisseKnoten);
+            erledigteKnoten.add(node);
+            ungewisseKnoten.remove(node);
+            findeMinimaleDistanz(node);
         }
     }
 
@@ -96,14 +96,14 @@ public class Dijkstra {
      * Ermittelt die benachbarten Knoten desjenigen Knotens, der übergeben wird.
      * Dabei werden die bereits erledigten Knoten ignoriert
      * 
-     * @param knoten
+     * @param node
      *            Der Knoten, dessen Nachbarn ermittelt werden sollen
      * @return Gibt Liste der benachbarten Knoten zurück
      */
-    private List<Vertex> getNachbarn(Vertex knoten) {
+    private List<Vertex> getNachbarn(Vertex node) {
         List<Vertex> nachbarn = new ArrayList<Vertex>();
         for (Edge e : kanten) {
-            if (e.getUrsprung().equals(knoten) && !besucht(e.getZiel())) {
+            if (e.getUrsprung().equals(node) && !besucht(e.getZiel())) {
                 nachbarn.add(e.getZiel());
             }
         }
@@ -114,12 +114,12 @@ public class Dijkstra {
      * Überprüft, ob ein Knoten besucht wurde, indem die Liste der erledigten Knoten
      * nach dem Parameter durchsucht wird
      * 
-     * @param knoten
+     * @param node
      *            Der Knoten, der überprüft werden soll
      * @return true, falls der Knoten besucht wurde, sonst false
      */
-    private boolean besucht(Vertex knoten) {
-        return erledigteKnoten.contains(knoten);
+    private boolean besucht(Vertex node) {
+        return erledigteKnoten.contains(node);
     }
 
     /**
@@ -148,15 +148,15 @@ public class Dijkstra {
      * diese Distanz übernommen, als Vorgänger vermerkt und der Nachbarknoten als
      * unbesucht gespeichert.
      * 
-     * @param knoten
+     * @param node
      *            Der Knoten, der erreicht werden soll
      */
-    private void findeMinimaleDistanz(Vertex knoten) {
-        List<Vertex> benachbarteKnoten = getNachbarn(knoten);
+    private void findeMinimaleDistanz(Vertex node) {
+        List<Vertex> benachbarteKnoten = getNachbarn(node);
         for (Vertex ziel : benachbarteKnoten) {
-            if (getKuerzesteDistanz(ziel) > getKuerzesteDistanz(knoten) + getDistanz(knoten, ziel)) {
-                distanz.put(ziel, getKuerzesteDistanz(knoten) + getDistanz(knoten, ziel));
-                vorgaenger.put(ziel, knoten);
+            if (getKuerzesteDistanz(ziel) > getKuerzesteDistanz(node) + getDistanz(node, ziel)) {
+                distanz.put(ziel, getKuerzesteDistanz(node) + getDistanz(node, ziel));
+                vorgaenger.put(ziel, node);
                 ungewisseKnoten.add(ziel);
             }
         }
@@ -166,13 +166,13 @@ public class Dijkstra {
      * Ermittelt denjenigen Knoten mit der kürzesten Distanz vom Startknoten aus.
      * Dabei werden die Distanzen aller Knoten zum Startknoten verglichen.
      * 
-     * @param knoten
+     * @param node
      *            Die Menge der Knoten, die sich im Graph befinden
      * @return den Knoten mit der geringsten Distanz vom Startknoten aus
      */
-    private Vertex getKleinstenKnoten(Set<Vertex> knoten) {
+    private Vertex getKleinstenKnoten(Set<Vertex> node) {
         Vertex minimum = null;
-        for (Vertex v : knoten) {
+        for (Vertex v : node) {
             if (minimum == null) {
                 minimum = v;
             } else {
