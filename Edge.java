@@ -1,4 +1,3 @@
-
 public class Edge {
     private Vertex ursprung;
     private Vertex ziel;

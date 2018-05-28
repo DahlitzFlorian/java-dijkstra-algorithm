@@ -23,8 +23,9 @@ public class Dijkstra {
 
     /**
      * Initialisiert die benötigten Maps und Sets.
-     * Führt den eigentlichen Algorithmus aus, solange ungewisse Knoten existieren, wird die
-     * kürzeste Distanz vom Startknoten zu allen anderen Knoten ermittelt.
+     * Führt den eigentlichen Algorithmus aus.
+     * Solange ungewisse Knoten existieren, wird die kürzeste Distanz vom
+     * Startknoten zu allen anderen Knoten ermittelt.
      * 
      * @param ursprung
      *            Startknoten
@@ -87,7 +88,8 @@ public class Dijkstra {
                 return e.getGewicht();
             }
         }
-        throw new RuntimeException("Da lief wohl etwas schief ¯\\_(ツ)_/¯");
+        throw new RuntimeException("Da lief wohl etwas schief ¯\\_(ツ)_/¯ "+
+                         "(Es gibt keine einzige Verbindung zwischen Urspung und Ziel)");
     }
 
     /**
@@ -180,7 +182,5 @@ public class Dijkstra {
             }
         }
         return minimum;
-    }
-
-    
+    } 
 }
